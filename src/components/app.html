@@ -1,0 +1,31 @@
+<div class="app">
+  <h1>Hello {{name}}!</h1>
+  
+  <Clock />
+  <Counter />
+
+  <svg viewBox='0 0 1000 1000' style='width: 100%; height: 100%;'>
+    <SmileyFace x='70' y='280' size='100' fill='#f4d9c7'/>
+    <SmileyFace x='800' y='250' size='150' fill='#40250f'/>
+    <SmileyFace x='150' y='700' size='110' fill='#d2aa7a'/>
+    <SmileyFace x='875' y='730' size='130' fill='#824e2e'/>
+    <SmileyFace x='450' y='500' size='240' fill='#d2b198'/>
+  </svg>
+</div>
+
+<script>
+  import Clock from './clock.html'
+  import Counter from './counter.html'
+  import SmileyFace from './smiley-svg.html'
+  export default {
+    components: { Clock, Counter, SmileyFace }
+  }
+</script>
+
+<style type="text/css">
+  .app { 
+    color: red;
+    font-size: 2em;
+    font-family: 'Comic Sans MS';
+  }
+</style>

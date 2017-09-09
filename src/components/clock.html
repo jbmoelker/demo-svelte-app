@@ -1,0 +1,36 @@
+<p>
+  The time is
+  <strong>{{hours}}:{{leftPad(minutes, 2, '0')}}:{{leftPad(seconds, 2, '0')}}</strong>
+</p>
+
+<script>
+  import leftPad from 'left-pad';
+
+  export default {
+    helpers: {
+      leftPad
+    },
+
+    oncreate () {
+      this.interval = setInterval(() => {
+        this.set({ time: new Date() })
+      }, 1000);
+    },
+
+    ondestroy () {
+      clearInterval(this.interval)
+    },
+
+    data () {
+      return {
+        time: new Date()
+      }
+    },
+
+    computed: {
+      hours: time => time.getHours(),
+      minutes: time => time.getMinutes(),
+      seconds: time => time.getSeconds()
+    },
+  }
+</script>
