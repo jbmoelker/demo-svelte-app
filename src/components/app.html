@@ -1,6 +1,6 @@
 <div class="app">
   <h1>Hello {{name}}!</h1>
-  
+
   <Clock />
   <Counter />
 
@@ -23,8 +23,11 @@
 </script>
 
 <style type="text/css">
+  @import 'normalize.css';
+  @import 'variables.css';
+
   .app { 
-    color: red;
+    color: var(--brand-color);
     font-size: 2em;
     font-family: 'Comic Sans MS';
   }

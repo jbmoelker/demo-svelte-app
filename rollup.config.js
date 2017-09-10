@@ -5,21 +5,36 @@ import resolve from 'rollup-plugin-node-resolve'  // https://github.com/rollup/r
 import svelte from 'rollup-plugin-svelte'         // https://github.com/rollup/rollup-plugin-svelte
 import uglify from 'rollup-plugin-uglify'         // https://github.com/TrySound/rollup-plugin-uglify
 
+import postcssProcess from './lib/postcss-process'
+
 const isProduction = (process.env.NODE_ENV === 'production')
 
 export default {
-	entry: 'src/index.js',
-	dest: 'dist/index.js',
-  sourceMap: 'dist/index.js.map',
-	format: 'iife',
+	input: 'src/index.js',
+	output: {
+    file: 'dist/index.js',
+    format: 'iife',
+  },
+  sourcemap: 'dist/index.js.map',
 	plugins: [
 		svelte({
-      css: (css) => css.write(`${__dirname}/dist/index.css`),
       cascade: false, // results in smaller CSS file
+      css: (css) => postcssProcess({ 
+        css: css.code, 
+        map: css.map 
+      }).catch(err => console.error(err)),
     }),
     resolve({ jsnext: true, main: true }),
     commonjs({ include: 'node_modules/**' }),
     isProduction && buble({ exclude: 'node_modules/**' }),
     isProduction && uglify(),
-	]
+  ],
+  // Using custom watch options (https://rollupjs.org/#watch-options)
+  // results in build no longer being triggered on any file change.
+  // So resorting to `watch:css` script in package.json isntead.
+  // watch: {
+  //   chokidar: true,
+  //   include: ['src/**/*.css', 'src/**/*.js'],
+  //   exclude: 'node_modules/**',
+  // },
 }

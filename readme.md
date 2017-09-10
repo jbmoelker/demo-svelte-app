@@ -2,6 +2,8 @@
 
 **Basic setup for a [Svelte](https://svelte.technology) app with examples from the Svelte [guide](https://svelte.technology/guide) as demo.**
 
+Uses [PostCSS](http://postcss.org/) for CSS `@import` and custom properties support.
+
 ## Scripts
 
 Development requires [Node.js](http://nodejs.org/) and [yarn](https://yarnpkg.com/) (alternatively you can use [npm](https://npmjs.org/)).
